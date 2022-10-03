@@ -1,7 +1,8 @@
 # Tests results
-Executed on 2022-10-03 13:56:57
+Executed on 2022-10-03 15:11:32
 <br />
 Checking app loader &amp; layout <b>.</b><b>.</b><b>.</b><b>.</b><b>.</b><b>.</b><br />
+Testing on() handler <b>.</b><br />
 Checking single component render <b>.</b><b>.</b><br />
 Checking ID/class attributes <b>.</b><b>.</b><b>.</b><br />
 Checking custom attributes <b>.</b><b>.</b><b>.</b><br />
@@ -28,5 +29,5 @@ Custom renderer <b>.</b><b>.</b><b>.</b><br />
 Endpoint helper <b>.</b><br />
 Files collector <b>.</b><b>.</b><br />
 <br />
-Done, <b>84</b> checks are ok<br />
+Done, <b>85</b> checks are ok<br />
 <br />
