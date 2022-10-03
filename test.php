@@ -359,10 +359,12 @@ if ( in_array('readme', $argv) ) {
   $output = ob_get_clean();
   echo $output;
 
+  $output = htmlspecialchars($output);
+
   $output = str_replace(
     ["\033[32m", "\033[31m", "\033[0m"],
     ['<b>', '<b>', '</b>'],
-    $output
+    nl2br($output)
   );
 
   file_put_contents(
