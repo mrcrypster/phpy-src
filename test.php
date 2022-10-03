@@ -219,6 +219,12 @@ if ( in_array('readme', $argv) ) {
   $output = ob_get_clean();
   echo $output;
 
+  $output = str_replace(
+    ["\033[32m", "\033[31m", "\033[0m"],
+    ['<span style="color: #2ECC40">', '<span style="color: #FF4136">', '</span>'],
+    $output
+  );
+
   file_put_contents(
     __DIR__ . '/tests.md',
     '# Tests results' . "\n" .
