@@ -45,6 +45,14 @@ $config = [
 
 
 
+$_ENV['test_on'] = '1';
+phpy::on('/', function() {
+  $_ENV['test_on'] = '2';
+  return true;
+});
+
+
+
 check_contains(
   'Checking app loader & layout',
   phpy($config), [
@@ -54,6 +62,14 @@ check_contains(
     '12345'       => 'Static version not found',
     'demo page'   => 'Default action not rendered',
     '<title>I\'m' => 'Title not rendered',
+]);
+
+
+
+check_contains(
+  'Testing on() handler',
+  $_ENV['test_on'], [
+    '2' => 'on() handler was not executed',
 ]);
 
 
@@ -95,10 +111,6 @@ check_contains(
     '{"msg":"hi"}' => 'Event data not found',
   ]
 );
-
-
-
-# @totest / on()
 
 
 
