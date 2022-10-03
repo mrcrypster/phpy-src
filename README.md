@@ -1,5 +1,5 @@
 # PHPy / source & tests
-This is an unassembled sources for [PHPy framework](https://github.com/mrcrypster/phpy).
+This is an unassembled sources, builder and test suite for [PHPy framework](https://github.com/mrcrypster/phpy).
 Feel free to add issues & pull-request something.
 
 ## Tests
