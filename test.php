@@ -138,8 +138,148 @@ check_contains(
 
 
 
+check_contains(
+  'Renderer: <datalist>',
+  phpy(['datalist:dl'   => ['a', 'b']]), [
+    '<datalist'          => '<datalist> element not found',
+    'id="dl"'            => 'ID attr fail',
+    '<option value="a"'  => 'first element not found',
+    '<option value="b"'  => 'second element not found',
+]);
 
-# @totest
+
+
+check_contains(
+  'Renderer: <button>',
+  phpy(['button:/path:after():are you sure'   => 'Click']), [
+    '<button'                    => '<button> element not found',
+    'onclick="if ( confirm('     => 'confirm condition not found',
+    'are you sure'               => 'confirmation text not found',
+    'phpy.apply(this, [\'/path\'' => 'phpy component handler not found'
+]);
+
+
+
+check_contains(
+  'Renderer: <submit>',
+  phpy(['submit' => 'Click']), [
+    '<button'       => '<button> element not found',
+    'type="submit"' => 'submit type not defined',
+]);
+
+
+
+check_contains(
+  'Renderer: <input>',
+  phpy(['input:email:Enter email' => []]), [
+    '<input'       => '<input> element not found',
+    'type="text"'  => 'text type not defined',
+    'name="email"' => 'name attr failed',
+    'placeholder'  => 'placeholder attr not found',
+    'Enter email'  => 'placeholder text not found',
+]);
+
+
+
+check_contains(
+  'Renderer: <input type="hidden">',
+  phpy(['hidden:id' => '123']), [
+    '<input'        => '<input> element not found',
+    'type="hidden"' => 'hidden type not defined',
+    'name="id"'     => 'name attr failed',
+    'value="123"'   => 'value failed',
+]);
+
+
+
+check_contains(
+  'Renderer: <input type="file">',
+  phpy(['file:myfile' => []]), [
+    '<input'        => '<input> element not found',
+    'type="file"'   => 'file type not defined',
+    'name="myfile"' => 'name attr failed',
+]);
+
+
+
+check_contains(
+  'Renderer: <input type="checkbox">',
+  phpy(['check:test:1' => []]), [
+    '<input'          => '<input> element not found',
+    'type="checkbox"' => 'checkbox type not defined',
+    'name="test"'     => 'name attr failed',
+    'checked="1"'     => 'checked flag failed',
+]);
+
+
+
+check_contains(
+  'Renderer: <input type="radio">',
+  phpy(['radio:test:1' => []]), [
+    '<input'          => '<input> element not found',
+    'type="radio"'    => 'checkbox type not defined',
+    'name="test"'     => 'name attr failed',
+    'checked="1"'     => 'checked flag failed',
+]);
+
+
+
+check_contains(
+  'Renderer: <img> / using default',
+  phpy(['img:/img.png' => []]), [
+    '<img'           => '<img> element not found',
+    'src="/img.png"' => 'src attr failed'
+]);
+
+
+
+check_contains(
+  'Renderer: <img> / using html',
+  phpy(['img' => 'http://test.com/img.png']), [
+    '<img'                          => '<img> element not found',
+    'src="http://test.com/img.png"' => 'src attr failed'
+]);
+
+
+
+check_contains(
+  'Renderer: <iframe>',
+  phpy(['iframe' => 'http://test.com/path']), [
+    '<iframe'                    => '<iframe> element not found',
+    'src="http://test.com/path"' => 'src attr failed'
+]);
+
+
+
+check_contains(
+  'Renderer: <video>',
+  phpy(['video' => 'http://test.com/clip.mp4']), [
+    '<video'                                 => '<video> element not found',
+    '<source src="http://test.com/clip.mp4"' => 'src attr failed'
+]);
+
+
+
+check_contains(
+  'Renderer: <progress>',
+  phpy(['progress:35:100' => '35%']), [
+    '<progress'   => '<progress> element not found',
+    'max="100"'   => 'max failed',
+    'value="35"'  => 'value failed',
+    '>35%<'       => 'html failed'
+]);
+
+
+
+check_contains(
+  'Renderer: <dl><dt><dd>',
+  phpy(['dl' => ['name' => 'D', 'age' => '3']]), [
+    '<dl'          => '<dl> element not found',
+    '<dt>name</dt>' => 'Name key failed',
+    '<dt>age</dt>'  => 'Age key failed',
+    '<dd>D</dd>'    => 'D value failed',
+    '<dd>3</dd>'    => '3 value failed',
+]);
 
 
 
@@ -221,7 +361,7 @@ if ( in_array('readme', $argv) ) {
 
   $output = str_replace(
     ["\033[32m", "\033[31m", "\033[0m"],
-    ['<span style="color: #2ECC40">', '<span style="color: #FF4136">', '</span>'],
+    ['<b>', '<b>', '</b>'],
     $output
   );
 

@@ -74,6 +74,35 @@ function phpy_post_render_select(&$html, &$attrs) {
 
 
 
+/* <datalist> */
+
+function phpy_pre_render_datalist(&$key, &$tpl, $phpy) {
+  $tpl = array_map(
+    fn($v) => ['option' => [':value' => $v]],
+    $tpl
+  );
+}
+
+function phpy_post_render_datalist(&$html, &$attrs) {
+  if ( isset($attrs['default'][0]) ) {
+    $attrs['id'] = $attrs['default'][0];
+  }
+}
+
+
+
+/* <dl> */
+
+function phpy_pre_render_dl(&$key, &$tpl, $phpy) {
+  $tpl = array_map(
+    fn($v, $k) => ['dt' => $k, 'dd' => $v],
+    array_values($tpl), array_keys($tpl)
+  );
+}
+
+
+
+
 /* <button> */
 
 function phpy_post_render_button(&$html, &$attrs) {
@@ -177,6 +206,72 @@ function phpy_post_render_check(&$html, &$attrs, $phpy) {
   $attrs_html = $phpy->tag_attrs($attrs);
   
   return "<input type=\"checkbox\" {$attrs_html}/>";
+}
+
+
+
+/* <input type="radio"> */
+
+function phpy_post_render_radio(&$html, &$attrs, $phpy) {
+  $attrs['name'] = isset($attrs['default'][0]) ? $attrs['default'][0] : (isset($attrs['name']) ? $attrs['name'] : 'check');
+  if ( $html || isset($attrs['default'][1]) ) {
+    $attrs['checked'] = 1;
+  }
+  
+  $attrs_html = $phpy->tag_attrs($attrs);
+  
+  return "<input type=\"radio\" {$attrs_html}/>";
+}
+
+
+
+/* <img> */
+
+function phpy_post_render_img(&$html, &$attrs, $phpy) {
+  $attrs['src'] = $html ?: (isset($attrs['default'][0]) ? $attrs['default'][0] : (isset($attrs['src']) ? $attrs['src'] : ''));
+  $attrs_html = $phpy->tag_attrs($attrs);
+  
+  return "<img {$attrs_html}/>";
+}
+
+
+
+/* <video> */
+
+function phpy_post_render_video(&$html, &$attrs, $phpy) {
+  if ( !is_array($html) && !isset($attrs['src']) ) {
+    $html = '<source src="' . $html . '">';
+  }
+
+  $attrs_html = $phpy->tag_attrs($attrs);
+  
+  return "<video {$attrs_html}>{$html}</video>";
+}
+
+
+
+/* <iframe> */
+
+function phpy_post_render_iframe(&$html, &$attrs, $phpy) {
+  $attrs['src'] = $html ?: (isset($attrs['default'][0]) ? $attrs['default'][0] : (isset($attrs['src']) ? $attrs['src'] : ''));
+  $attrs_html = $phpy->tag_attrs($attrs);
+  
+  return "<iframe {$attrs_html}/>";
+}
+
+
+
+/* <progress> */
+
+function phpy_post_render_progress(&$html, &$attrs, $phpy) {
+  if ( isset($attrs['default'][0]) ) {
+    $attrs['value'] = $attrs['default'][0];
+  }
+  
+  $attrs['max'] = isset($attrs['default'][1]) ? $attrs['default'][1] : 100;
+  $attrs_html = $phpy->tag_attrs($attrs);
+  
+  return "<progress {$attrs_html}>{$html}</progress>";
 }
 
 

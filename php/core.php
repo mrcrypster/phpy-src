@@ -152,6 +152,14 @@ class phpy {
       return $html;
     }
 
+    if ( strpos($tag, ':') ) {
+      $params = explode(':', $tag);
+      $tag = array_shift($params);
+      foreach ( $params as $param ) {
+        $attrs['default'][] = $param;
+      }
+    }
+
     if ( preg_match_all('/\.([^:# ]+)/', $tag, $mm) ) {
       foreach ( $mm[1] as $class ) {
         $classes[] = str_replace('.', ' ', $class);
@@ -168,15 +176,6 @@ class phpy {
         $attrs['id'] = $id;
       }
     }
-
-    if ( preg_match_all('/\:([^#.:]*)/', $tag, $mm) ) {
-      foreach ( $mm[1] as $param ) {
-        $attrs['default'][] = $param;
-      }
-
-      $tag = preg_replace('/\:([^#.:]*)/', '', $tag);
-    }
-
 
     if ( !$tag ) {
       $tag = 'span';
