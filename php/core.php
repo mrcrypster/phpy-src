@@ -3,10 +3,7 @@
 /* Core engine */
 
 class phpy {
-  private $config = [
-    'layout' => 'layout'
-  ];
-  
+  private $config = [ 'layout' => 'layout' ];
   public static $listeners = [];
   public static $events = [];
 
@@ -17,6 +14,14 @@ class phpy {
     }
   }
 
+  public function set($param, $value) {
+    $this->config[$param] = $value;
+  }
+
+  public function get($param) {
+    return $this->config[$param];
+  }
+
   public static function instance($data = []) {
     static $phpy;
 
@@ -25,10 +30,6 @@ class phpy {
     }
 
     return $phpy;
-  }
-
-  public function set($param, $value) {
-    $this->config[$param] = $value;
   }
 
 
@@ -42,7 +43,7 @@ class phpy {
 
   # Return current endpoint
   public static function endpoint() {
-    return parse_url(isset($_SERVER['REQUEST_URI']) ?: '')['path'];
+    return parse_url(isset($_SERVER['REQUEST_URI']) ?: '/')['path'];
   }
 
   # Publish event to client

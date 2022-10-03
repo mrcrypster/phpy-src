@@ -21,12 +21,13 @@ function phpy($data_or_com = null, $args = []) {
 # files collector
 function collect_files($extensions, $dir = null) {
   $content = '';
-  if ( !$dir ) {
-    $content .= collect_files($extensions, __DIR__);
-  }
 
-  $dir = isset($dir) ? $dir : dirname(phpy::config('/'));
+  $dir = isset($dir) ? $dir : dirname(phpy::instance()->get('/'));
   $dir .= '/*';
+
+  if ( !is_array($extensions) ) {
+    $extensions = [$extensions];
+  }
 
   foreach ( glob($dir) as $f ) {
     if ( is_dir($f) ) {
