@@ -1,6 +1,6 @@
 /* Pub/sub component */
 
-var pubsub = {}
+let pubsub = {}
 
 function pub(event, data) {
   if ( pubsub[event] ) {
