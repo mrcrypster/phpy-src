@@ -9,3 +9,9 @@ Feel free to add issues & pull-request something.
 ```
 php test.php
 ```
+
+## Build
+Assemble files into [phpy](https://github.com/mrcrypster/phpy) repository
+```
+php build.php
+```
