@@ -1,5 +1,5 @@
 # Tests results
-Executed on 2022-10-10 10:59:44
+Executed on 2022-10-10 14:45:52
 <br />
 Checking app loader &amp; layout <b>.</b><b>.</b><b>.</b><b>.</b><b>.</b><b>.</b><br />
 Testing on() handler <b>.</b><br />
