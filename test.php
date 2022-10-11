@@ -107,7 +107,7 @@ pub('test', ['msg' => 'hi']);
 check_contains(
   'App events',
   phpy('/layout'), [
-    "pub('test'"   => 'Event not fired',
+    "pub(\"test"   => 'Event not fired',
     '{"msg":"hi"}' => 'Event data not found',
   ]
 );
