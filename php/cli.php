@@ -10,14 +10,16 @@ if ( php_sapi_name() == "cli" ) {
 
     file_put_contents(
       $dir . '/web/index.php',
-      '<?php' . "\n\n" .
-      'require_once ' . __FILE__ . ';' . "\n" .
+      '<' . '?php' . "\n\n" .
+      'phpy::on(\'/css.css\', fn() => phpy::css());' . "\n" .
+      'phpy::on(\'/js.js\', fn() => phpy::js());' . "\n\n" .
+      'require_once \'' . __FILE__ . '\';' . "\n" .
       'echo phpy([\'/\' => __DIR__]);' . "\n"
     );
 
     file_put_contents(
       $dir . '/app/layout.php',
-      '<?php return [\'html\' => [' . "\n" .
+      '<' . '?php return [\'html\' => [' . "\n" .
       '  \':v\' => 1,' . "\n" .
       '  \':title\' => \'PHPy2 App\',' . "\n" .
       '  \'div\' => phpy()' . "\n" .
@@ -26,7 +28,7 @@ if ( php_sapi_name() == "cli" ) {
 
     file_put_contents(
       $dir . '/app/default.php',
-      '<?php return [\'h1\' => \'I am the PHPy2 app\'];'
+      '<' . '?php return [\'h1\' => \'I am the PHPy2 app\'];'
     );
 
     echo "\n";

@@ -238,4 +238,30 @@ class phpy {
 
     return [$html, $attrs];
   }
+
+
+
+  /* Default routing handlers */
+  protected static function collect($dir, $exts) {
+    $c = '';
+
+    foreach (glob($dir . '/*') as $f ) {
+      if ( is_dir($f) ) $c .= self::collect($f, $exts);
+      else if ( in_array(pathinfo($f, PATHINFO_EXTENSION), $exts) ) $c .= "\n" . file_get_contents($f);
+    }
+
+    return $c;
+  }
+
+  public static function css() {
+    header('Content-type: text/css');
+    $js = file_get_contents(__DIR__ . '/phpy.css') . self::collect((self::instance()->get('/') . '/../app'), ['css']);
+    echo $js;
+  }
+
+  public static function js() {
+    header('Content-type: application/javascript');
+    $js = file_get_contents(__DIR__ . '/phpy.js') . self::collect((self::instance()->get('/') . '/../app'), ['js']);
+    echo $js;
+  }
 }
