@@ -56,7 +56,7 @@ class phpy {
   # application launcher
   public function app() {
     foreach ( self::$listeners as $pattern => $handlers ) {
-      if ( ($pattern == $this->endpoint()) || preg_match($pattern, $this->endpoint()) ) {
+      if ( ($pattern == $this->endpoint()) || @preg_match($pattern, $this->endpoint()) ) {
         foreach ( $handlers as $cb ) {
           $continue = $cb($this);
         }
