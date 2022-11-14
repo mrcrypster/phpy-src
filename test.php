@@ -227,11 +227,12 @@ check_contains(
 
 check_contains(
   'Renderer: <input type="radio">',
-  phpy(['radio:test:1' => []]), [
+  phpy(['radio:test:1' => '23']), [
     '<input'          => '<input> element not found',
     'type="radio"'    => 'checkbox type not defined',
     'name="test"'     => 'name attr failed',
     'checked="1"'     => 'checked flag failed',
+    'value="23"'      => 'value failed'
 ]);
 
 
