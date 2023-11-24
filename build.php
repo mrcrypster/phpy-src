@@ -1,7 +1,7 @@
 <?php
 
 # Save built files to this dir
-$dst = realpath( $argv[1] ?: __DIR__ . '/../phpy');
+$dst = realpath( $argv[1] ?: __DIR__ . '/build');
 if ( !is_dir($dst) ) die('Destination bulding folder not found' . "\n");
 
 
