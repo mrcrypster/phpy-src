@@ -67,6 +67,14 @@ function redirect($url) {
   }
 }
 
+# generate url with query string based on current url
+function url($params = [], $path = null) {
+  $url = parse_url($_SERVER['REQUEST_URI']);
+  parse_str($url['query'], $q);
+  $query = http_build_query(array_merge($q?:[], $params));
+  return ($path ?: $url['path']) . ($query ? '?' : '') . $query;
+}
+
 
 
 /* Utilities */
